@@ -1,4 +1,20 @@
-## react-iconfont-cli
+由于总所周知的原因，iconfont自建项目已经不再能上传新的svg图标，所以我做了两件事:
+
+1、把已有的图标下载保存为svg文件<br />
+2、把从线上地址读取symbol改为从本地文件夹读取svg文件<br />
+
+## 使用说明
+如果你不是`react-iconfont-cli`的用户，请先阅读下面的原始文档
+
+1、clone 代码并`yarn`<br />
+2、修改配置文件 `./scripts/config/demo-ts.json` 配置自己的`symbol_url`<br />
+3、执行 `./scripts/download-svg.sh` ，把图标下载到本地<br />
+4、如果你有需要新增的svg文件，可以直接拷贝到 `./snapshots/demo-svg` 文件夹内<br />
+5、执行 `./scripts/update-snapshot.sh` 生成react组件文件<br />
+
+-----------
+
+## 以下为react-iconfont-cli原始文档
 用纯JS把iconfont.cn的图标转换成React组件，不依赖字体，支持多色彩
 
 ![](https://github.com/fwh1990/react-iconfont-cli/blob/master/images/icons.png?raw=true)

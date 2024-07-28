@@ -16,7 +16,7 @@ import {
   replaceNamesArray,
   replaceSingleIconContent,
   replaceSize,
-  replaceSizeUnit,
+  // replaceSizeUnit,
 } from './replace';
 import { whitespace } from './whitespace';
 import { copyTemplate } from './copyTemplate';
@@ -42,13 +42,16 @@ export const generateComponent = (data: XmlData, config: Config) => {
   data.svg.symbol.forEach((item) => {
     let singleFile: string;
     const iconId = item.$.id;
-    const iconIdAfterTrim = config.trim_icon_prefix
+    
+    let iconIdAfterTrim = config.trim_icon_prefix
       ? iconId.replace(
         new RegExp(`^${config.trim_icon_prefix}(.+?)$`),
         (_, value) => value.replace(/^[-_.=+#@!~*]+(.+?)$/, '$1')
       )
       : iconId;
-    const componentName = upperFirst(camelCase(iconId));
+      
+    const componentName = upperFirst(camelCase(iconId.split('.')[0]));
+    iconIdAfterTrim =  iconIdAfterTrim.split('.')[0]
 
     names.push(iconIdAfterTrim);
 
@@ -61,7 +64,7 @@ export const generateComponent = (data: XmlData, config: Config) => {
     singleFile = replaceSize(singleFile, config.default_icon_size);
     singleFile = replaceComponentName(singleFile, componentName);
     singleFile = replaceSingleIconContent(singleFile, generateCase(item, 4));
-    singleFile = replaceSizeUnit(singleFile, config.unit);
+    // singleFile = replaceSizeUnit(singleFile, config.unit);
 
     fs.writeFileSync(path.join(saveDir, componentName + jsxExtension), singleFile);
 
@@ -99,7 +102,7 @@ export const generateComponent = (data: XmlData, config: Config) => {
 };
 
 const generateCase = (data: XmlData['svg']['symbol'][number], baseIdent: number) => {
-  let template = `\n${whitespace(baseIdent)}<svg viewBox="${data.$.viewBox}" width={size} height={size} style={style} {...rest}>\n`;
+  let template = `\n${whitespace(baseIdent)}<Svg viewBox="${data.$.viewBox}" width={size} height={size} style={style} {...rest}>\n`;
 
   for (const domName of Object.keys(data)) {
     if (domName === '$') {
@@ -117,15 +120,15 @@ const generateCase = (data: XmlData['svg']['symbol'][number], baseIdent: number)
     };
 
     if (data[domName].$) {
-      template += `${whitespace(baseIdent + 2)}<${domName}${addAttribute(domName, data[domName], counter)}\n${whitespace(baseIdent + 2)}/>\n`;
+      template += `${whitespace(baseIdent + 2)}<${upperFirst(domName)}${addAttribute(domName, data[domName], counter)}\n${whitespace(baseIdent + 2)}/>\n`;
     } else if (Array.isArray(data[domName])) {
       data[domName].forEach((sub) => {
-        template += `${whitespace(baseIdent + 2)}<${domName}${addAttribute(domName, sub, counter)}\n${whitespace(baseIdent + 2)}/>\n`;
+        template += `${whitespace(baseIdent + 2)}<${upperFirst(domName)}${addAttribute(domName, sub, counter)}\n${whitespace(baseIdent + 2)}/>\n`;
       });
     }
   }
 
-  template += `${whitespace(baseIdent)}</svg>\n`;
+  template += `${whitespace(baseIdent)}</Svg>\n`;
 
   return template;
 };

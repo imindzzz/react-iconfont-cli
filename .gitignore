@@ -4,4 +4,5 @@ node_modules/
 build/
 /iconfont.json
 .DS_Store
-snapshots
+snapshots/demo-js
+snapshots/demo-ts

@@ -3,7 +3,7 @@
   "use_typescript": true,
   "save_dir": "./snapshots/demo-ts",
   "svg_dir": "./snapshots/demo-svg",
-  "trim_icon_prefix": "icon",
+  "trim_icon_prefix": "Icon",
   "unit": "rem",
   "default_icon_size": 16
 }

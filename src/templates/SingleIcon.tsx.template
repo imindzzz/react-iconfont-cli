@@ -1,26 +1,21 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import React, { CSSProperties, SVGAttributes, FunctionComponent } from 'react';
+import React, {FunctionComponent } from 'react';
+import {Svg,Path} from '@/components/Svg'
+import { SvgProps } from 'react-native-svg';
 import { getIconColor } from './helper';
 
-interface Props extends Omit<SVGAttributes<SVGElement>, 'color'> {
+type Props = Omit<SvgProps,'color'> & {
   size?: number;
   color?: string | string[];
 }
 
-const DEFAULT_STYLE: CSSProperties = {
-  display: 'block',
-};
-
-const #componentName#: FunctionComponent<Props> = ({ size, color, style: _style, ...rest }) => {
-  const style = _style ? { ...DEFAULT_STYLE, ..._style } : DEFAULT_STYLE;
+const #componentName#: FunctionComponent<Props> = ({ size, color, style, ...rest }) => {
+  
 
   return (#iconContent#  );
 };
 
-#componentName#.defaultProps = {
-  size: #size#,
-};
 
 export default #componentName#;

@@ -1,19 +1,24 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import React, { SVGAttributes, FunctionComponent } from 'react';
+import React, { FunctionComponent } from 'react';
+import { SvgProps } from 'react-native-svg';
+import pxToDp from '@/utils/pxToDp';
 #imports#
 #exports#
 
 export type IconNames = '#names#';
 
-interface Props extends Omit<SVGAttributes<SVGElement>, 'color'> {
+type Props = Omit<SvgProps,'color'> & {
   name: IconNames;
   size?: number;
   color?: string | string[];
 }
 
 const IconFont: FunctionComponent<Props> = ({ name, ...rest }) => {
+  if(!rest.size){
+    rest.size = pxToDp(18)
+  }
   switch (name) {
 #cases#
   }

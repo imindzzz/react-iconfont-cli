@@ -86,6 +86,7 @@ export const generateComponent = (data: XmlData, config: Config) => {
 
   if (config.use_typescript) {
     iconFile = replaceNames(iconFile, names);
+    iconFile = replaceNamesArray(iconFile, names);
   } else {
     iconFile = replaceNamesArray(iconFile, names);
 

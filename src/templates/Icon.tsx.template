@@ -8,6 +8,7 @@ import pxToDp from '@/utils/pxToDp';
 #exports#
 
 export type IconNames = '#names#';
+export const IconNameArray:IconNames[] = #namesArray#;
 
 type Props = Omit<SvgProps,'color'> & {
   name: IconNames;
